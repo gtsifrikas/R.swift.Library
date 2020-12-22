@@ -21,6 +21,16 @@ public extension UIImage {
    - returns: An image that exactly or best matches the desired traits with the given resource (R.image.*), or nil if no suitable image was found.
   */
   convenience init?(resource: ImageResourceType, compatibleWith traitCollection: UITraitCollection? = nil) {
+    
+    let candidateBundles = [resource.bundle] + ResourceBundles.available
+    
+    for candidateBundle in candidateBundles {
+        if  UIImage(named: resource.name, in: candidateBundle, compatibleWith: traitCollection) != nil {
+            self.init(named: resource.name, in: candidateBundle, compatibleWith: traitCollection)
+            return
+        }
+    }
+    
     self.init(named: resource.name, in: resource.bundle, compatibleWith: traitCollection)
   }
   #endif

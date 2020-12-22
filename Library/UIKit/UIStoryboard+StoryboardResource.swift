@@ -18,6 +18,15 @@ public extension UIStoryboard {
    - returns: A storyboard object for the specified file. If no storyboard resource file matching name exists, an exception is thrown with description: `Could not find a storyboard named 'XXXXXX' in bundle....`
    */
   convenience init(resource: StoryboardResourceType) {
+    
+    let candidateBundles = [resource.bundle] + ResourceBundles.available
+    
+    for candidateBundle in candidateBundles {
+        if candidateBundle.url(forResource: resource.name, withExtension: "storyboardc") != nil {
+            self.init(name: resource.name, bundle: candidateBundle)
+        }
+    }
+    
     self.init(name: resource.name, bundle: resource.bundle)
   }
 }
