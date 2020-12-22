@@ -24,6 +24,7 @@ public extension UINib {
     for candidateBundle in candidateBundles {
         if candidateBundle.url(forResource: resource.name, withExtension: "nib") != nil {
             self.init(nibName: resource.name, bundle: candidateBundle)
+            return
         }
     }
     

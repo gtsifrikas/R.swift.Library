@@ -25,6 +25,7 @@ public extension UIViewController {
     for candidateBundle in candidateBundles {
         if candidateBundle.url(forResource: nib.name, withExtension: "nib") != nil {
             self.init(nibName: nib.name, bundle: candidateBundle)
+            return
         }
     }
     

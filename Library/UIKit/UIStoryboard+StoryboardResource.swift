@@ -24,6 +24,7 @@ public extension UIStoryboard {
     for candidateBundle in candidateBundles {
         if candidateBundle.url(forResource: resource.name, withExtension: "storyboardc") != nil {
             self.init(name: resource.name, bundle: candidateBundle)
+            return
         }
     }
     
